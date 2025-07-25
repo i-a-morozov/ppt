@@ -42,7 +42,7 @@ polynomial[degree_Integer,
 (* invariant      -- (expression)    previous order invariant *)
 (* exact          -- (bool)          flag to use LinearSolve, use for fully simbolic case, default=False *)
 (* apply          -- (function)      function to apply to computed coefficients, default=Identity *)
-(* method         -- (string)        LinearSolve method, default="CofactorExpansion" *)
+(* method         -- (string)        LinearSolve method, default="Automatic" *)
 (* Returns *)
 (* {rules, invariant} *)
 (* rules          -- (list)          rules for invariant coefficients (current degree) *)
@@ -59,7 +59,7 @@ solve[degree_Integer,
       invariant_,
       exact_:False,
       apply_:Identity,
-      method_:"CofactorExpansion"] := Block[
+      method_:"Automatic"] := Block[
     {head, epsilon, exponents, coefficients, monomials, forward, current, system, matrix, vector, rules},
     SetAttributes[head, NHoldAll] ;
     epsilon /: epsilon^(n_) /; n > degree := 0 ;
@@ -114,7 +114,7 @@ average[angles_,
             ]
         ]
     ] ;
-    invariant /. rules
+    invariant //. rules
 ] ;
 
 (* ################################################################################################################## *)
